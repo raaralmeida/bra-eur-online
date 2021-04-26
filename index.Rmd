@@ -1,6 +1,6 @@
 --- 
 title: "PBWG Interactive Report"
-author: "DECEA Performance Section, EUROCONTROL Performance Review Unit"
+author: "PBWG Members"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -9,10 +9,10 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: https://github.com/rainer-rq-koelle/bra-eur-online/
-description: "This is the first stab at putting the Brazil Europe Comparison online."
+description: "This is a bookdown demo on the PBWG COVID reporting for the meeting on 27. April 2021."
 ---
 
-# Prerequisites
+# Front Matters {-}
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
@@ -119,3 +119,14 @@ sin_count_airport <- sin_count_airport %>% mutate(APT_ICAO = as.factor(ICAO), .b
 
 ```
 
+The Performance Benchmarking Working Group aims to foster the understanding of the ICAO Global Air Navigation Plan (GANP) key performance indicators and jointly works on establishing commonly agreed definitions and algorithms in support of the GANP.
+This report reflects a set of air traffic measures addressing the current COVID/post-COVID developments.
+
+PBWG Members are
+
+* Brazil, DECEA
+* Europe, EUROCONTROL
+* Japan, JCAB
+* Singapore, CAAS
+* Thailand, AEROTHAI
+* United States of America, FAA

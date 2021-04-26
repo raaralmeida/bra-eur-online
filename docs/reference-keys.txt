@@ -1,5 +1,4 @@
 prerequisites
-intro
 introduction
 scope
 europe-airports

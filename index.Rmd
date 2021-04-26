@@ -22,14 +22,100 @@ knitr::write_bib(c(
 ```
 
 
-This project does something.
 
-```{r}
-# load BRA data
-bra <- c(2021)
-eur <- c(2021)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
 
-x <- bra + eur
+#For Fabio's personal computer only, due to MacOS in Portuguese as default, please run in console:
+#Sys.setlocale("LC_ALL", "en_US.UTF-8")
+
+#Run those functions IF YOU NEED:
+#install.packages("tidyverse")
+#install.packages("lubridate")
+#install.packages("plotly")
+#install.packages("zoo")
+#install.packages("patchwork")
+#install.packages("readr")
+#install.packages("gdata")
+#install.packages("readxl")
+library(tidyverse)
+library(lubridate)
+library(plotly)
+library(zoo)
+library(patchwork)
+library(readr)
+library(gdata)
+library(readxl)
+
 ```
 
-This is the sexy combination `r x`.
+
+```{r}
+#useful filters
+bra_10_apts <- c("SBBR", "SBGR", "SBSP", "SBKP", "SBRJ", "SBGL", "SBCF", "SBSV", "SBPA", "SBCT")
+bra_12_apts <- c("SBBR", "SBGR", "SBSP", "SBKP", "SBRJ", "SBGL", "SBCF", "SBSV", "SBPA", "SBCT", "SBFL", "SBRF")
+
+bra_prefixes <- c("^SB", "^SD", "^SI", "^SJ", "^SN", "^SS", "^SW", "^9P", "^ZZ")
+
+year_min <- 2019
+year_max <- 2021
+```
+
+```{r}
+#Readind data
+
+#EUROPE
+pbwg_eur_count <- read_csv("./data/PBWG-EUR-region-traffic.csv")
+eur_count_airport <- read_csv("./data/PBWG-EUR-airport-traffic.csv")
+eur_city_pairs <- read_csv("./data/PBWG-EUR-airport-pairs.csv")
+eur_count_airport <- eur_count_airport %>% mutate(APT_ICAO = as.factor(ICAO), .before = DATE, DATE = date(DATE), .keep = "unused")
+
+#BRAZIL
+pbwg_bra_count <- read_csv("./data/PBWG-BRA-region-traffic.csv")
+bra_count_airport <- read_csv("./data/PBWG-BRA-airport-traffic.csv")
+pbwg_bra_city_pairs <- read_csv("data/PBWG-BRA-city-pairs.csv")
+
+#THAILAND
+tha_count_airport      <- list()
+tha_count_airport$vtbs <- readxl::read_xlsx("./data-raw/20210302_BKK_FIR Summary-edited-fb.xlsx", sheet = "VTBS")
+tha_count_airport$vtbd <- readxl::read_xlsx("./data-raw/20210302_BKK_FIR Summary-edited-fb.xlsx", sheet = "VTBD")
+tha_count_airport$vtsp <- readxl::read_xlsx("./data-raw/20210302_BKK_FIR Summary-edited-fb.xlsx", sheet = "VTSP")
+tha_count_airport$vtcc <- readxl::read_xlsx("./data-raw/20210302_BKK_FIR Summary-edited-fb.xlsx", sheet = "VTCC")
+
+tha_ovrflts <- readxl::read_xlsx("./data-raw/20210302_BKK_FIR Summary-edited-fb.xlsx", sheet = "Overfly")
+
+tha_count_airport <- tha_count_airport %>%
+  purrr::map_dfr(.f = bind_rows) %>%
+  filter(lubridate::year(DATE) >= 2019)
+
+# ------------- TO DO: write out Thailand data to data folder in csv ----- DONE BELOW!!
+tha_count_airport <- tha_count_airport %>% transmute(APT_ICAO = as.factor(APT_ICAO),
+                                DATE = date(DATE),
+                                ARRS = ARRS,
+                                DEPS = DEPS,
+                                HEAVY = HEAVY,
+                                MED = MED,
+                                LIGHT = LIGHT,
+                                ARRS_DOM = ARRS_DOM,
+                                DEPS_DOM = DEPS_DOM)
+
+write_csv(tha_count_airport, "./data/PBWG-THA-airport-traffic.csv")
+
+#THAI REGIONAL DATA
+#temp_tha <- tha_count_airport %>% mutate(REG = "THA", .before = APT_ICAO) %>% group_by(REG, DATE) %>% summarize(ARRS = sum(ARRS), DEPS = sum(DEPS), HEAVY = sum(HEAVY), MED = sum(MED), LIGHT = sum(LIGHT), ARRS_DOM = sum(ARRS_DOM), DEPS_DOM = sum(DEPS_DOM))
+#write_csv(temp_tha, "./data/PBWG-THA-region-traffic.csv")
+#rm(temp_tha)
+pbwg_tha_count <- read_csv("./data/PBWG-THA-region-traffic.csv")
+
+#SINGAPORE
+sin_count_airport <- readxl::read_xlsx("./data-raw/PBWG-SIN-traffic.xlsx", sheet = "WSSS")
+sin_ovrflts       <- readxl::read_xlsx("./data-raw/PBWG-SIN-traffic.xlsx", sheet = "SIN FIR Overflights")
+
+sin_count_airport <- sin_count_airport %>% mutate(APT_ICAO = as.factor(ICAO), .before = DATE, DATE = date(DATE), .keep = "unused")
+# ------------- TO DO: write out Singapore data to data folder in csv ------ DONE BELOW
+
+#write_csv(sin_count_airport, "./data/PBWG-SIN-airport-traffic.csv")
+
+
+```
+

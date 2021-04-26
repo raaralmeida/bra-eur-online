@@ -1,7 +1,62 @@
-# Applications
+# Region level breakdown
 
-Some _significant_ applications are demonstrated in this chapter.
+## Brazil
+```{r}
+#BRAZIL OVERVIEW
+ds2 <- bra_reg %>% mutate(
+  YR = as.factor(year(DATE)),
+  fake_date = update(DATE, year = 1)
+)
 
-## Example one
+#building graph
+ds2 %>% ggplot(aes(x = date(fake_date))) +
+  geom_line(aes(y = MVTS, color = YR)) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b") +
+  labs(x = "Date", y = "Daily operations", color = "Year")
+```
 
-## Example two
+## Europe
+```{r}
+#EUROPE OVERVIEW
+ds3 <- eur_reg %>% mutate(
+  YR = as.factor(year(DATE)),
+  fake_date = update(DATE, year = 1)
+)
+
+#building graph
+ds3 %>% ggplot(aes(x = date(fake_date))) +
+  geom_line(aes(y = MVTS, color = YR)) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b") +
+  labs(x = "Date", y = "Daily operations", color = "Year")
+```
+
+## Thailand
+```{r}
+#THAILAND OVERVIEW
+ds6 <- pbwg_tha_count %>% mutate(
+  YR = as.factor(year(DATE)),
+  fake_date = update(DATE, year = 1)
+)
+
+#building graph
+ds6 %>% ggplot(aes(x = date(fake_date))) +
+  geom_line(aes(y = MVTS, color = YR)) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b") +
+  labs(x = "Date", y = "Daily operations", color = "Year")
+
+```
+
+## Singapore
+```{r}
+#SINGAPORE OVERVIEW
+ds4 <- pbwg_sin_count %>% mutate(
+  YR = as.factor(year(DATE)),
+  fake_date = update(DATE, year = 1)
+)
+
+#building graph
+ds4 %>% ggplot(aes(x = date(fake_date))) +
+  geom_line(aes(y = MVTS, color = YR)) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b") +
+  labs(x = "Date", y = "Daily operations", color = "Year")
+```

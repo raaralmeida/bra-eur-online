@@ -1,0 +1,78 @@
+# Top city pairs
+
+```{r}
+#TOP N
+N <- 10
+```
+
+## Brazil routes
+```{r}
+#------Fabio quick note 1 - it is filtered by DEP sources only - we need to check on that... 
+#------Fabio quick note 2 - I ungrouped and then grouped again just for the sake of remembering how to do it and to clearly show the ".groups" argument. I could've just not used the argument and "summarize" would keep it grouped by year. Just to practice :-P
+
+ds9 <- pbwg_bra_city_pairs %>% filter(SRC_PHASE == "DEP") %>%
+  transmute(ROUTE = paste(APT_ICAO, PAIR_APT, sep = "-"), .before = APT_ICAO, YR = year(DATE), DEPS) %>%
+  group_by(YR , ROUTE) %>%
+  summarize(TOTAL_DEPS = as.integer(sum(DEPS)), .groups = "drop") %>%
+  group_by(YR = as.factor(YR)) %>% 
+  slice_max(n = N, order_by = TOTAL_DEPS)
+
+#Fabio quick note 2 - I am not sure how to visualize this data so I let here 2 options below
+
+#viz option 1 - Fabio prefer this one
+#top 2019
+bra_temp_2019 <- ds9 %>% filter(YR == 2019) %>%
+  ggplot(aes(x = reorder(ROUTE, TOTAL_DEPS))) +
+  geom_col(aes(y = TOTAL_DEPS), fill = "green3", width = 0.5) +
+  geom_label(aes(y = TOTAL_DEPS, label = TOTAL_DEPS), color = "darkgreen", size = 3) +
+  coord_flip() +
+  scale_y_continuous(limits = c(0, 25000)) +
+  labs(y = "Departures 2019", x = "Routes") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+#top 2020
+bra_temp_2020 <- ds9 %>% filter(YR == 2020) %>%
+  ggplot(aes(x = reorder(ROUTE, TOTAL_DEPS))) +
+  geom_col(aes(y = TOTAL_DEPS), fill = "blue", width = 0.5) +
+  geom_label(aes(y = TOTAL_DEPS, label = TOTAL_DEPS), color = "darkblue", size = 3) +
+  coord_flip() +
+  scale_y_continuous(limits = c(0, 25000)) +
+  labs(y = "Departures 2020") +
+  theme(axis.title.y = element_blank(), axis.text.x = element_text(angle = 90, vjust = 0.5))
+
+#patch them side-by-side
+(bra_temp_2019 | bra_temp_2020) +
+  plot_annotation(title = "Top 10 routes per year")
+
+```
+
+## Europe routes
+```{r}
+ds10 <- eur_city_pairs %>% transmute(YR = as.factor(YEAR), ROUTE = paste(ADEP_ICAO, ADES_ICAO, sep = "-"), TOTAL_DEPS = as.integer(N)) %>%
+  group_by(YR = as.factor(YR)) %>% 
+  slice_max(n = N, order_by = TOTAL_DEPS)
+
+#top 2019
+eur_temp_2019 <- ds10 %>% filter(YR == 2019) %>%
+  ggplot(aes(x = reorder(ROUTE, TOTAL_DEPS))) +
+  geom_col(aes(y = TOTAL_DEPS), fill = "green3", width = 0.5) +
+  geom_label(aes(y = TOTAL_DEPS, label = TOTAL_DEPS), color = "darkgreen", size = 3) +
+  coord_flip() +
+  scale_y_continuous(limits = c(0, 25000)) +
+  labs(y = "Departures 2019", x = "Routes") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+#top 2020
+eur_temp_2020 <- ds10 %>% filter(YR == 2020) %>%
+  ggplot(aes(x = reorder(ROUTE, TOTAL_DEPS))) +
+  geom_col(aes(y = TOTAL_DEPS), fill = "blue", width = 0.5) +
+  geom_label(aes(y = TOTAL_DEPS, label = TOTAL_DEPS), color = "darkblue", size = 3) +
+  coord_flip() +
+  scale_y_continuous(limits = c(0, 25000)) +
+  labs(y = "Departures 2020") +
+  theme(axis.title.y = element_blank(), axis.text.x = element_text(angle = 90, vjust = 0.5))
+
+#patch them side-by-side
+(eur_temp_2019 | eur_temp_2020) +
+  plot_annotation(title = "Top 10 routes per year")
+
+```
+

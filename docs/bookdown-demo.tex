@@ -153,100 +153,106 @@ This is the sexy combination 4042.
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"./\_data/eur\_nm\_tfc.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
 
-\begin{verbatim}
-## 
-## -- Column specification --------------------------------------------------------
-## cols(
-##   DATE = col_date(format = ""),
-##   N = col_double(),
-##   MAP_IND = col_double()
-## )
-\end{verbatim}
+The present briefing aims to provide a comparison of the COVID-19 impacts on aviation in different parts of the world. The regions covered herein are Europe, Brazil, Thailand, and Singapore.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{scope}{%
+\chapter{Scope}\label{scope}}
 
-\begin{verbatim}
-## Warning: package 'tidyverse' was built under R version 4.0.3
-\end{verbatim}
+The following airports are covered by this briefing:
 
-\begin{verbatim}
-## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-\end{verbatim}
+\hypertarget{europe-airports}{%
+\section{Europe airports}\label{europe-airports}}
 
-\begin{verbatim}
-## v ggplot2 3.3.3     v purrr   0.3.4
-## v tibble  3.1.0     v dplyr   1.0.5
-## v tidyr   1.1.2     v stringr 1.4.0
-## v readr   1.4.0     v forcats 0.5.0
-\end{verbatim}
+EDDF, EDDM, EGLL, EHAM, LEMD, LFPG, LIRF, and LSZH
 
-\begin{verbatim}
-## Warning: package 'ggplot2' was built under R version 4.0.3
-\end{verbatim}
+\hypertarget{brazil-airports}{%
+\section{Brazil airports}\label{brazil-airports}}
 
-\begin{verbatim}
-## Warning: package 'tibble' was built under R version 4.0.4
-\end{verbatim}
+SBBR, SBCF, SBCT, SBFL, SBGL, SBGR, SBKP, SBPA, SBRF, SBRJ, SBSP, and SBSV
 
-\begin{verbatim}
-## Warning: package 'readr' was built under R version 4.0.3
-\end{verbatim}
+\hypertarget{thailand-airports}{%
+\section{Thailand airports}\label{thailand-airports}}
 
-\begin{verbatim}
-## Warning: package 'dplyr' was built under R version 4.0.4
-\end{verbatim}
+VTBD, VTBS, VTCC, and VTSP
 
-\begin{verbatim}
-## Warning: package 'forcats' was built under R version 4.0.3
-\end{verbatim}
+\hypertarget{singapore-airports}{%
+\section{Singapore airports}\label{singapore-airports}}
 
-\begin{verbatim}
-## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-\end{verbatim}
+WSSS
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(ggplot2)}
-\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ DATE, }\AttributeTok{y =}\NormalTok{ N))}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{overview-comparison}{%
+\chapter{Overview comparison}\label{overview-comparison}}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-4-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-5-1.pdf}
 
-\hypertarget{literature}{%
-\chapter{Literature}\label{literature}}
+\hypertarget{overflights}{%
+\section{Overflights}\label{overflights}}
 
-Here is a review of existing methods.
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-6-1.pdf}
 
-\hypertarget{methods}{%
-\chapter{Methods}\label{methods}}
+\hypertarget{international-traffic}{%
+\section{International traffic}\label{international-traffic}}
 
-We describe our methods in this chapter.
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-7-1.pdf}
 
-\hypertarget{applications}{%
-\chapter{Applications}\label{applications}}
+\hypertarget{region-level-breakdown}{%
+\chapter{Region level breakdown}\label{region-level-breakdown}}
 
-Some \emph{significant} applications are demonstrated in this chapter.
+\hypertarget{brazil}{%
+\section{Brazil}\label{brazil}}
 
-\hypertarget{example-one}{%
-\section{Example one}\label{example-one}}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-8-1.pdf}
 
-\hypertarget{example-two}{%
-\section{Example two}\label{example-two}}
+\hypertarget{europe}{%
+\section{Europe}\label{europe}}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\hypertarget{thailand}{%
+\section{Thailand}\label{thailand}}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\hypertarget{singapore}{%
+\section{Singapore}\label{singapore}}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\hypertarget{airport-level-breakdown}{%
+\chapter{Airport level breakdown}\label{airport-level-breakdown}}
+
+Except for Singapore, which has only one airport in the study, it is possible to look the different effects on individual airports within each region.
+
+\hypertarget{brazil-airports-1}{%
+\section{Brazil airports}\label{brazil-airports-1}}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-2.pdf}
+
+\hypertarget{europe-airports-1}{%
+\section{Europe airports}\label{europe-airports-1}}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-2.pdf}
+
+\hypertarget{thailand-airports-1}{%
+\section{Thailand airports}\label{thailand-airports-1}}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-14-2.pdf}
+
+\hypertarget{top-city-pairs}{%
+\chapter{Top city pairs}\label{top-city-pairs}}
+
+\hypertarget{brazil-routes}{%
+\section{Brazil routes}\label{brazil-routes}}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\hypertarget{europe-routes}{%
+\section{Europe routes}\label{europe-routes}}
+
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-17-1.pdf}
 
   \bibliography{book.bib,packages.bib}
 

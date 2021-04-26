@@ -1,3 +1,87 @@
-# Methods
+# Overview comparison
+```{r}
+# utility function - daily counts (no overflights)
+# including normalisation of counts to quantile with
+ref_pct   <- 0.5
 
-We describe our methods in this chapter.
+daily_reg_count <- . %>% 
+  group_by(DATE) %>% 
+  summarize(MVTS = sum(ARRS, DEPS)) %>%
+  mutate(MVTS_NORM = MVTS / quantile(MVTS[lubridate::year(DATE)==2019], probs = ref_pct))
+
+eur_reg <- pbwg_eur_count %>% daily_reg_count() %>% mutate(REG = "EUR")
+
+bra_reg <- pbwg_bra_count %>% daily_reg_count() %>% mutate(REG = "BRA")
+
+# THA region = sum all study airports
+pbwg_tha_count <- tha_count_airport %>% daily_reg_count() %>% mutate(REG = "THA")
+
+# SIN region == WSSS
+pbwg_sin_count <- sin_count_airport %>% daily_reg_count() %>% mutate(REG = "SIN")
+
+bind_rows(
+  pbwg_sin_count, pbwg_tha_count, bra_reg, eur_reg
+) %>%
+  ggplot(aes(x = date(DATE))) +
+  geom_line(aes(y = MVTS_NORM, colour = REG)) +
+  scale_x_date(date_labels = "%b-%y", limits = c(as.Date("2019-07-01"), Sys.Date())) +
+  theme_minimal() +
+  labs( title    = "PBWG - regional air traffic comparison"
+       ,subtitle = "normalised movements"
+       ,x = NULL, y = NULL)
+```
+
+## Overflights
+
+```{r}
+tha_ovrflts2 <- tha_ovrflts %>% group_by(DATE) %>%
+  summarise(OVR_FLTS = sum(HEAVY, MED, na.rm = TRUE)) %>%
+  mutate(ICAO = "BKK") %>%
+  filter(lubridate::year(DATE) >= 2019)
+
+sin_ovrflts2 <- sin_ovrflts %>% mutate(ICAO = "SIN")
+
+eur_ovrflts <- read_csv("./data/PBWG-EUR-region-traffic.csv") %>%
+  select(ICAO = REG, DATE, OVR_FLTS)
+
+bind_rows(
+  tha_ovrflts2, sin_ovrflts2, eur_ovrflts
+) %>%
+  ggplot(aes(x = date(DATE))) +
+  geom_line(aes(y = OVR_FLTS, colour = ICAO)) +
+  scale_x_date(date_labels = "%b-%y") +
+  theme_minimal() +
+  labs( title    = "PBWG - regional overflight count"
+       ,x = NULL, y = NULL)
+```
+
+## International traffic
+```{r}
+#REFERENCE PERCENTILE
+ref_pct_int <- 0.5
+#UTILITY INTERNATIONAL FUNCTION
+daily_reg_count_international <- . %>% 
+  group_by(DATE) %>% 
+  summarize(MVTS_INT = (sum(ARRS-ARRS_DOM, DEPS-DEPS_DOM))) %>%
+  mutate(MVTS_NORM = MVTS_INT / quantile(MVTS_INT[lubridate::year(DATE)==2019], probs = ref_pct_int)
+         )
+
+pbwg_eur_count_int <- eur_count_airport %>% daily_reg_count_international() %>% mutate(REG = "EUR")
+pbwg_bra_count_int <- bra_count_airport %>% daily_reg_count_international() %>% mutate(REG = "BRA")
+pbwg_tha_count_int <- tha_count_airport %>% daily_reg_count_international() %>% mutate(REG = "THA")
+pbwg_sin_count_int <- sin_count_airport %>% daily_reg_count_international() %>% mutate(REG = "SIN")
+
+bind_rows(pbwg_bra_count_int,
+          pbwg_eur_count_int,
+          pbwg_tha_count_int,
+          pbwg_sin_count_int) %>%
+  ggplot(aes(x = date(DATE))) +
+  geom_line(aes(y = MVTS_NORM, colour = REG)) +
+  scale_x_date(date_labels = "%b-%y") +
+  theme_minimal() +
+  labs( title    = "PBWG - regional air traffic comparison"
+       ,subtitle = "normalised international movements"
+       ,x = NULL, y = NULL)
+
+```
+

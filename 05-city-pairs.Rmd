@@ -1,0 +1,59 @@
+# Airport level breakdown
+Except for Singapore, which has only one airport in the study, it is possible to look the different effects on individual airports within each region.
+
+## Brazil airports
+```{r}
+#BRAZIL AIRPORTS BREAKDOWNS
+
+ds5 <- bra_count_airport %>% filter(year(DATE) == 2021) %>% group_by(DATE, APT_ICAO) %>% summarise(TOTAL = sum(ARRS,DEPS))
+
+#BREAKDOWN WITH COLORS
+ds5 %>% ggplot(aes(x = DATE)) +
+  geom_line(aes(y = TOTAL, color = APT_ICAO))+
+  scale_x_date(date_labels = "%b-%y")
+
+#BREAKDOWN WITH FACETS
+ds5 %>% ggplot(aes(x = DATE)) +
+  geom_line(aes(y = TOTAL)) +
+  facet_wrap(APT_ICAO~.) +
+  scale_x_date(date_labels = "%b")
+
+```
+
+## Europe airports
+```{r}
+#EUROPE AIRPORTS BREAKDOWNS
+
+ds7 <- eur_count_airport %>% filter(year(DATE) == 2020) %>% group_by(DATE, APT_ICAO) %>% summarise(TOTAL = sum(ARRS,DEPS))
+
+#BREAKDOWN WITH COLORS
+ds7 %>% ggplot(aes(x = DATE)) +
+  geom_line(aes(y = TOTAL, color = APT_ICAO))+
+  scale_x_date(date_labels = "%b-%y")
+
+#BREAKDOWN WITH FACETS
+ds7 %>% ggplot(aes(x = DATE)) +
+  geom_line(aes(y = TOTAL)) +
+  facet_wrap(APT_ICAO~., nrow = 2, ncol = 4) +
+  scale_x_date(date_labels = "%b")
+
+```
+
+## Thailand airports
+```{r}
+#THAILAND AIRPORTS BREAKDOWNS
+
+ds8 <- tha_count_airport %>% filter(year(DATE) == 2020) %>% group_by(DATE, APT_ICAO) %>% summarise(TOTAL = sum(ARRS,DEPS))
+
+#BREAKDOWN WITH COLORS
+ds8 %>% ggplot(aes(x = DATE)) +
+  geom_line(aes(y = TOTAL, color = APT_ICAO))+
+  scale_x_date(date_labels = "%b-%y")
+
+#BREAKDOWN WITH FACETS
+ds8 %>% ggplot(aes(x = DATE)) +
+  geom_line(aes(y = TOTAL)) +
+  facet_wrap(APT_ICAO~.) +
+  scale_x_date(date_labels = "%b")
+
+```

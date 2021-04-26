@@ -23,3 +23,13 @@ knitr::write_bib(c(
 
 
 This project does something.
+
+```{r}
+# load BRA data
+bra <- c(2021)
+eur <- c(2021)
+
+x <- bra + eur
+```
+
+This is the sexy combination `r x`.

@@ -108,8 +108,8 @@ write_csv(tha_count_airport, "./data/PBWG-THA-airport-traffic.csv")
 pbwg_tha_count <- read_csv("./data/PBWG-THA-region-traffic.csv")
 
 #SINGAPORE
-sin_count_airport <- readxl::read_xlsx("./data-raw/PBWG-SIN-traffic.xlsx", sheet = "WSSS")
-sin_ovrflts       <- readxl::read_xlsx("./data-raw/PBWG-SIN-traffic.xlsx", sheet = "SIN FIR Overflights")
+sin_count_airport <- readxl::read_xlsx("./data-raw/PBWG-traffic-SIN_20210425.xlsx", sheet = "WSSS")
+sin_ovrflts       <- readxl::read_xlsx("./data-raw/PBWG-traffic-SIN_20210425.xlsx", sheet = "SIN FIR Overflights")
 
 sin_count_airport <- sin_count_airport %>% mutate(APT_ICAO = as.factor(ICAO), .before = DATE, DATE = date(DATE), .keep = "unused")
 # ------------- TO DO: write out Singapore data to data folder in csv ------ DONE BELOW

@@ -19,12 +19,17 @@ pbwg_tha_count <- tha_count_airport %>% daily_reg_count() %>% mutate(REG = "THA"
 # SIN region == WSSS
 pbwg_sin_count <- sin_count_airport %>% daily_reg_count() %>% mutate(REG = "SIN")
 
+# USA region
+usa_reg <- pbwg_usa_count %>% group_by(DATE = ACT_DATE) %>% 
+  summarize(MVTS = sum(US_AIRSPACE)) %>%
+  mutate(MVTS_NORM = MVTS / quantile(MVTS[lubridate::year(DATE)==2019], probs = ref_pct)) %>% mutate(REG = "USA")
+
 bind_rows(
-  pbwg_sin_count, pbwg_tha_count, bra_reg, eur_reg
+  pbwg_sin_count, pbwg_tha_count, bra_reg, eur_reg, usa_reg
 ) %>%
   ggplot(aes(x = date(DATE))) +
   geom_line(aes(y = MVTS_NORM, colour = REG)) +
-  scale_x_date(date_labels = "%b-%y", limits = c(as.Date("2019-07-01"), Sys.Date())) +
+  scale_x_date(date_labels = "%b-%y", limits = c(as.Date("2019-10-01"), Sys.Date())) +
   theme_minimal() +
   labs( title    = "PBWG - regional air traffic comparison"
        ,subtitle = "normalised movements"

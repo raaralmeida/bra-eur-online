@@ -116,6 +116,8 @@ sin_count_airport <- sin_count_airport %>% mutate(APT_ICAO = as.factor(ICAO), .b
 
 #write_csv(sin_count_airport, "./data/PBWG-SIN-airport-traffic.csv")
 
+#USA
+pbwg_usa_count <- read_excel("data-raw/PBWG Covid-19 Traffic Counts V2.xlsx", sheet = "US NAS Counts", range = "A1:C732", col_types = c("date", "numeric", "numeric"))
 
 ```
 

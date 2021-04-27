@@ -1,10 +1,11 @@
-prerequisites
 introduction
 scope
-europe-airports
 brazil-airports
+europe-airports
+japan-airports
 thailand-airports
 singapore-airports
+usa-airports
 overview-comparison
 overflights
 international-traffic

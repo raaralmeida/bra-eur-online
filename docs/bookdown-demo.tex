@@ -37,7 +37,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={PBWG Interactive Report},
-  pdfauthor={DECEA Performance Section, EUROCONTROL Performance Review Unit},
+  pdfauthor={PBWG Members},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -83,8 +83,8 @@
 \bibliographystyle{apalike}
 
 \title{PBWG Interactive Report}
-\author{DECEA Performance Section, EUROCONTROL Performance Review Unit}
-\date{2021-04-26}
+\author{PBWG Members}
+\date{2021-04-27}
 
 \begin{document}
 \maketitle
@@ -93,28 +93,55 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{prerequisites}{%
-\chapter{Prerequisites}\label{prerequisites}}
+\hypertarget{front-matters}{%
+\chapter*{Front Matters}\label{front-matters}}
+\addcontentsline{toc}{chapter}{Front Matters}
+
+The Performance Benchmarking Working Group aims to foster the understanding of the ICAO Global Air Navigation Plan (GANP) key performance indicators and jointly works on establishing commonly agreed definitions and algorithms in support of the GANP.
+This report reflects a set of air traffic measures addressing the current COVID/post-COVID developments.
+
+PBWG Members are
+
+\begin{itemize}
+\tightlist
+\item
+  Brazil, DECEA
+\item
+  Europe, EUROCONTROL
+\item
+  Japan, JCAB
+\item
+  Singapore, CAAS
+\item
+  Thailand, AEROTHAI
+\item
+  United States of America, FAA
+\end{itemize}
 
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
-The present briefing aims to provide a comparison of the COVID-19 impacts on aviation in different parts of the world. The regions covered herein are Europe, Brazil, Thailand, and Singapore.
+The present briefing aims to provide a comparison of the COVID-19 impacts on aviation in different parts of the world. The regions covered herein are Brazil, Europe, Japan, Thailand, Singapore and the United States.
 
 \hypertarget{scope}{%
 \chapter{Scope}\label{scope}}
 
 The following airports are covered by this briefing:
 
+\hypertarget{brazil-airports}{%
+\section{Brazil airports}\label{brazil-airports}}
+
+SBBR, SBCF, SBCT, SBFL, SBGL, SBGR, SBKP, SBPA, SBRF, SBRJ, SBSP, and SBSV
+
 \hypertarget{europe-airports}{%
 \section{Europe airports}\label{europe-airports}}
 
 EDDF, EDDM, EGLL, EHAM, LEMD, LFPG, LIRF, and LSZH
 
-\hypertarget{brazil-airports}{%
-\section{Brazil airports}\label{brazil-airports}}
+\hypertarget{japan-airports}{%
+\section{Japan airports}\label{japan-airports}}
 
-SBBR, SBCF, SBCT, SBFL, SBGL, SBGR, SBKP, SBPA, SBRF, SBRJ, SBSP, and SBSV
+TBD
 
 \hypertarget{thailand-airports}{%
 \section{Thailand airports}\label{thailand-airports}}
@@ -125,6 +152,11 @@ VTBD, VTBS, VTCC, and VTSP
 \section{Singapore airports}\label{singapore-airports}}
 
 WSSS
+
+\hypertarget{usa-airports}{%
+\section{USA airports}\label{usa-airports}}
+
+TBD
 
 \hypertarget{overview-comparison}{%
 \chapter{Overview comparison}\label{overview-comparison}}
@@ -167,22 +199,26 @@ WSSS
 \hypertarget{airport-level-breakdown}{%
 \chapter{Airport level breakdown}\label{airport-level-breakdown}}
 
+In 2020, the coronavirus crisis represented very different impacts depending on the airport. Figure n below shows the drop of flight operations (departures and arrivals), in comparison to 2019, at the airports under study.
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf}
+All airports had decreases in their movements, ranging from -36\% to -67\%. In general, Singapore suffered the most, for the international travels were greatly affected. Brazilian airports had lower impacts than Europe. SBKP Campinas, for example, had -36\% - which is not so bad, giving the context. That happened probably due to a larger share of cargo aviation at that particular airport.
+
 Except for Singapore, which has only one airport in the study, it is possible to look the different effects on individual airports within each region.
 
 \hypertarget{brazil-airports-1}{%
 \section{Brazil airports}\label{brazil-airports-1}}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-11-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-11-2.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-2.pdf}
 
 \hypertarget{europe-airports-1}{%
 \section{Europe airports}\label{europe-airports-1}}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-12-2.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-2.pdf}
 
 \hypertarget{thailand-airports-1}{%
 \section{Thailand airports}\label{thailand-airports-1}}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-13-2.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-14-1.pdf} \includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-14-2.pdf}
 
 \hypertarget{top-city-pairs}{%
 \chapter{Top city pairs}\label{top-city-pairs}}
@@ -190,12 +226,12 @@ Except for Singapore, which has only one airport in the study, it is possible to
 \hypertarget{brazil-routes}{%
 \section{Brazil routes}\label{brazil-routes}}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-15-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-16-1.pdf}
 
 \hypertarget{europe-routes}{%
 \section{Europe routes}\label{europe-routes}}
 
-\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-16-1.pdf}
+\includegraphics{bookdown-demo_files/figure-latex/unnamed-chunk-17-1.pdf}
 
   \bibliography{book.bib,packages.bib}
 

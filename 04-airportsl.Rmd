@@ -20,8 +20,9 @@ ds <- pbwg_apt %>% mutate(VARIATION = round((MVTS-MVTS[YEAR==2019])/MVTS[YEAR==2
 
 g1 <- ds %>% ggplot(aes(x = reorder(APT_ICAO, VARIATION))) +
   geom_col(aes(y = VARIATION, fill = REG)) +
-  geom_text(aes(y = -0.05, label = APT_ICAO), size = 2, color = "white") +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(-0.7,0), n.breaks = 7) +
+  geom_text(aes(y = -0.05, label = APT_ICAO), size = 2.5, color = "white") +
+  geom_text(aes(y = VARIATION, label = scales::percent(VARIATION, accuracy = 1)), size = 2.5, color = "white", nudge_y = 0.02) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1), limits = c(-0.7,0), n.breaks = 7) +
   coord_flip() +
   theme_minimal() +
   theme(axis.text.y = element_blank(), axis.title = element_blank()) +
